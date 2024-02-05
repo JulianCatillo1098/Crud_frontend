@@ -24,4 +24,4 @@ export const usuariosSlice = createSlice({
   },
 });
 
-export const { datosNuevosDeUsuarios,estadoCrearUsuariotrue} = usuariosSlice.actions;
+export const { datosNuevosDeUsuarios,estadoCrearUsuariotrue,usuarioIngresado} = usuariosSlice.actions;

@@ -6,4 +6,15 @@ const validarUsuarioExistente = (nombre) => {
   return nombre.toLowerCase() != usuarios;
 };
 
-export{validarNombre}
+const extrarUsuario = (array, valorBuscar) => {
+let objetoUsuario=null
+  for (let i = 0; i < array.length; i++) {
+    if (array[i].value == valorBuscar) {
+      objetoUsuario = array[i];
+      break;
+    }
+  }
+  return objetoUsuario
+};
+
+export { validarNombre, extrarUsuario };

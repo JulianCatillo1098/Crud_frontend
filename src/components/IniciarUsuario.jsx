@@ -7,12 +7,13 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useId, useState } from "react";
 import { UseMySelect } from "../hook/UseMySelect";
 import { CrearUsuario } from "./CrearUsuario";
 import { useDispatch, useSelector } from "react-redux";
-import { estadoCrearUsuariotrue } from "../store/usuariosSlice";
+import { estadoCrearUsuariotrue, usuarioIngresado } from "../store/usuariosSlice";
 import { useUsuariosStore } from "../hook/useUsuariosStore";
+import { extrarUsuario } from "../validaciones/validaciones";
 
 export const IniciarUsuario = () => {
   const { datos, crearUsuario} = useSelector((state) => state.usuarios);
@@ -21,7 +22,8 @@ export const IniciarUsuario = () => {
 
   const onButonIngresar = (valor) => {
     const valorSelecionado = localStorage.getItem('valorSelecionado');
-    cargarDatos()
+    const usuarioAingresar = extrarUsuario(datos.userIds,valorSelecionado)
+    dispatch(usuarioIngresado(usuarioAingresar))
   };
 
   const onButonCrear = () => {

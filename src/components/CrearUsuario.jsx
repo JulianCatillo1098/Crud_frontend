@@ -3,13 +3,12 @@ import { useForm } from "react-hook-form";
 import { validarNombre } from '../validaciones/validaciones';
 import { useDispatch, useSelector } from 'react-redux';
 import { useUsuariosStore } from '../hook/useUsuariosStore';
-import { estadoCrearUsuariotrue } from '../store/usuariosSlice';
+import { datosNuevosDeUsuarios, estadoCrearUsuariotrue } from '../store/usuariosSlice';
 
 
 
 export const CrearUsuario = () => {
   const dispatch= useDispatch()
-  const {agregarUsuarioNuevo} = useUsuariosStore();
     const {
         handleSubmit,
         register,
@@ -22,7 +21,7 @@ export const CrearUsuario = () => {
       const ultimoValor = datos.userIds[datos.userIds.length-1].value
       const nombreDelUsuarioNuevo = data.nombre 
       const nuevoObjeto= {value:ultimoValor+1,name:nombreDelUsuarioNuevo}
-      agregarUsuarioNuevo(nuevoObjeto)
+      dispatch(datosNuevosDeUsuarios(nuevoObjeto))
       dispatch(estadoCrearUsuariotrue())
   }
       
