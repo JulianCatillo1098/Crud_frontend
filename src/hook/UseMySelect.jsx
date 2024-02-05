@@ -15,13 +15,13 @@ export const UseMySelect = ({
 
   const handleChange = (event) => {
     setOpcion(event.target.value);
-    console.log(event.target.value);
+    localStorage.setItem("valorSelecionado",JSON.stringify(event.target.value));
   };
 
   return (
     <Grid container justifyContent="center" alignItems="center">
       <Grid item xs={12} md={12} marginTop={4} style={{ textAlign: "center" }}>
-        <InputLabel id={nombre}>{nombre}</InputLabel>
+        <InputLabel id={nombre} >{nombre}</InputLabel>
         <Select
           labelId={nombre}
           id={nombre}

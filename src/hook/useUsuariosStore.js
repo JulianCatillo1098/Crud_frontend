@@ -1,22 +1,23 @@
 import { useDispatch } from "react-redux";
-import { datosNuevosDeUsuarios } from "../store/usuariosSlice";
-
+import { todosDatos } from "../store/notaSlice";
+import axios from "axios";
 
 export const useUsuariosStore = () => {
 
-    const dispatch = useDispatch()
 
-  const agregarUsuarioNuevo = (objeto) => {
+  const dispatch = useDispatch();
+
+  const cargarDatos = async (numero) => {
 
     try {
-
-      dispatch(datosNuevosDeUsuarios(objeto));
-
+      const { data } = await axios.get(
+        `https://jsonplaceholder.typicode.com/todos`
+      );
+      dispatch(todosDatos(data));
     } catch (error) {
-        
-      console.log("Error al agregar un nuevo usuario", error);
+      console.log("Error al cargar los pokemones:", error);
     }
   };
-  
-  return {agregarUsuarioNuevo};
+
+  return { cargarDatos };
 };

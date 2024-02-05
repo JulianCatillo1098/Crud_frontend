@@ -12,14 +12,20 @@ import { UseMySelect } from "../hook/UseMySelect";
 import { CrearUsuario } from "./CrearUsuario";
 import { useDispatch, useSelector } from "react-redux";
 import { estadoCrearUsuariotrue } from "../store/usuariosSlice";
+import { useUsuariosStore } from "../hook/useUsuariosStore";
 
 export const IniciarUsuario = () => {
   const { datos, crearUsuario} = useSelector((state) => state.usuarios);
+  const { cargarDatos} = useUsuariosStore();
   const dispatch = useDispatch()
+
+  const onButonIngresar = (valor) => {
+    const valorSelecionado = localStorage.getItem('valorSelecionado');
+    cargarDatos()
+  };
 
   const onButonCrear = () => {
     dispatch(estadoCrearUsuariotrue())
-    
   };
 
   return (
@@ -55,6 +61,7 @@ export const IniciarUsuario = () => {
             color="primary"
             type="submit"
             style={{ width: "100px", marginRight: "11px" }}
+            onClick={onButonIngresar}
           >
             Ingresar
           </Button>
@@ -70,6 +77,9 @@ export const IniciarUsuario = () => {
         </Grid>
         {crearUsuario === true  ?<CrearUsuario /> : <></>}
       </Grid>
+      
     </>
   );
+
 };
+

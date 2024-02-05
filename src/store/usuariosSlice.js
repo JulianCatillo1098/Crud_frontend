@@ -18,6 +18,9 @@ export const usuariosSlice = createSlice({
     datosNuevosDeUsuarios: (state, { payload }) => {
       state.datos.userIds.push(payload);
     },
+    usuarioIngresado:(state,{payload})=>{
+    state.usuarioingresado=payload}
+    
   },
 });
 
