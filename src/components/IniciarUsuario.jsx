@@ -26,8 +26,9 @@ export const IniciarUsuario = () => {
   const onButonIngresar = (valor) => {
     const valorSelecionado = localStorage.getItem('valorSelecionado');
     const usuarioAingresar = extrarUsuario(datos.userIds,valorSelecionado)
-    dispatch(usuarioIngresado(usuarioAingresar))
     cargarDatos()
+    dispatch(usuarioIngresado(usuarioAingresar))
+
     navigate("/ingreasadousuario")
   };
 

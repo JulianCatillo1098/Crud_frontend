@@ -11,24 +11,26 @@ import { useNavigate } from "react-router-dom";
 import { IniciarUsuario } from "./IniciarUsuario";
 import { Side } from "./side";
 import { activarSide } from "../store/notaSlice";
+import { CartNotas } from "./CartNotas";
+import { Grid } from "@mui/material";
 
 export const VistaUsuario = () => {
   const { usuarioingresado } = useSelector((state) => state.usuarios);
-  const { side } = useSelector((state) => state.notas);
+  const { side, notas } = useSelector((state) => state.notas);
   const navigate = useNavigate();
-  const dispatch= useDispatch()
+  const dispatch = useDispatch();
 
   const onLogin = () => {
     navigate("/");
   };
-  const onmenu=()=>{
-    dispatch(activarSide())
-}
+  const onmenu = () => {
+    dispatch(activarSide());
+  };
 
   return (
     <>
       {usuarioingresado ? (
-        <Box sx={{ display: 'flex', flexDirection: 'column', height: '100vh' }}>
+        <Box sx={{ display: "flex", flexDirection: "column", height: "100vh" }}>
           <AppBar position="static">
             <Toolbar>
               <IconButton
@@ -41,7 +43,12 @@ export const VistaUsuario = () => {
               >
                 <MenuIcon />
               </IconButton>
-              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+              <Typography
+                variant="h6"
+                component="div"
+                align="center"
+                sx={{ flexGrow: 1 }}
+              >
                 {usuarioingresado.name}
               </Typography>
               <Button color="inherit" onClick={onLogin}>
@@ -52,10 +59,20 @@ export const VistaUsuario = () => {
           <Box sx={{ flexGrow: 1 }}>
             {/* Aquí puedes poner tu contenido principal */}
             <Typography variant="h2" component="h1" gutterBottom>
-              Contenido principal
+              <Grid container spacing={2}>
+              {notas && Array.isArray(notas) ? (
+                notas.map((dato) => (
+                  <CartNotas key={dato.id}userId={dato.userId} title={dato.title} />
+                ))
+              ) : (
+                <h5>Cargando notas...</h5>
+              )}
+
+              </Grid>
+              
             </Typography>
           </Box>
-          {side?(<Side/>):("")}
+          {side ? <Side /> : ""}
         </Box>
       ) : (
         <IniciarUsuario />
