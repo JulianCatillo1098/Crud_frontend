@@ -7,7 +7,7 @@ export const useUsuariosStore = () => {
 
   const dispatch = useDispatch();
 
-  const cargarDatos = async (numero) => {
+  const cargarDatos = async () => {
 
     try {
       const { data } = await axios.get(

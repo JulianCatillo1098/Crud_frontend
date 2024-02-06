@@ -2,8 +2,6 @@ import {
   AppBar,
   Button,
   Grid,
-  MenuItem,
-  TextField,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -12,18 +10,25 @@ import { UseMySelect } from "../hook/UseMySelect";
 import { CrearUsuario } from "./CrearUsuario";
 import { useDispatch, useSelector } from "react-redux";
 import { estadoCrearUsuariotrue, usuarioIngresado } from "../store/usuariosSlice";
-import { useUsuariosStore } from "../hook/useUsuariosStore";
 import { extrarUsuario } from "../validaciones/validaciones";
+import { useNavigate } from "react-router-dom";
+import { useUsuariosStore } from "../hook/useUsuariosStore";
 
 export const IniciarUsuario = () => {
+
   const { datos, crearUsuario} = useSelector((state) => state.usuarios);
-  const { cargarDatos} = useUsuariosStore();
+  const {cargarDatos}= useUsuariosStore()
   const dispatch = useDispatch()
+  const navigate = useNavigate();
+
+
 
   const onButonIngresar = (valor) => {
     const valorSelecionado = localStorage.getItem('valorSelecionado');
     const usuarioAingresar = extrarUsuario(datos.userIds,valorSelecionado)
     dispatch(usuarioIngresado(usuarioAingresar))
+    cargarDatos()
+    navigate("/ingreasadousuario")
   };
 
   const onButonCrear = () => {
