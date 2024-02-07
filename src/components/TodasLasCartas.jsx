@@ -12,7 +12,7 @@ export const TodasLasCartas = () => {
           <CartNotas key={dato.id} userId={dato.userId} title={dato.title} />
         ))
       ) : (
-        <h8>Cargando notas...</h8>
+        <h5>Cargando notas...</h5>
       )}
     </Grid>
   );

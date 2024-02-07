@@ -10,15 +10,25 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useDispatch } from "react-redux";
-import { activarSide, todasLasNotas } from "../store/notaSlice";
+import { activarMisNotas, activarSide, crearNotas, todasLasNotas } from "../store/notaSlice";
 const drawerWidth = 240;
 export const Side = () => {
+  
    const dispatch=useDispatch()
-  const onTodasLasNotas=()=>{
-    dispatch(todasLasNotas())
+
+   const onMisNotas=()=>{
     dispatch(activarSide())
-    
+    dispatch(activarMisNotas())
   }
+  const onTodasLasNotas=()=>{
+    dispatch(activarSide())
+    dispatch(todasLasNotas())
+  }
+  const onCrearNotas=()=>{
+    dispatch(activarSide())
+    dispatch(crearNotas())
+  }
+
   return (
     <Drawer
       sx={{
@@ -28,8 +38,10 @@ export const Side = () => {
           width: drawerWidth,
           boxSizing: "border-box",
           marginTop:8
+
         },
       }}
+      position="static"
       variant="permanent"
       anchor="left"
     >
@@ -37,7 +49,7 @@ export const Side = () => {
       <List>
 
         <ListItem key="Crear nota" disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={onCrearNotas}>
             <ListItemIcon>
               <AddBoxTwoToneIcon />
             </ListItemIcon>
@@ -46,7 +58,7 @@ export const Side = () => {
         </ListItem>
 
         <ListItem key="Mis notas" disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={onMisNotas}>
             <ListItemIcon>
               <DescriptionTwoToneIcon />
             </ListItemIcon>
@@ -55,7 +67,7 @@ export const Side = () => {
         </ListItem>
 
         <ListItem key="Todas las notas" disablePadding>
-          <ListItemButton onClick={onTodasLasNotas()}>
+          <ListItemButton onClick={onTodasLasNotas} >
             <ListItemIcon>
               <DatasetTwoToneIcon />
             </ListItemIcon>
