@@ -4,7 +4,6 @@ import { userIds } from "../datos/datsoQuemados";
 export const usuariosSlice = createSlice({
   name: "usuarios",
   initialState: {
-    usuario:null,
     crearUsuario:false,
     usuarioingresado:false,
     datos: { userIds },

@@ -9,8 +9,16 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import { useDispatch } from "react-redux";
+import { activarSide, todasLasNotas } from "../store/notaSlice";
 const drawerWidth = 240;
 export const Side = () => {
+   const dispatch=useDispatch()
+  const onTodasLasNotas=()=>{
+    dispatch(todasLasNotas())
+    dispatch(activarSide())
+    
+  }
   return (
     <Drawer
       sx={{
@@ -47,7 +55,7 @@ export const Side = () => {
         </ListItem>
 
         <ListItem key="Todas las notas" disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={onTodasLasNotas()}>
             <ListItemIcon>
               <DatasetTwoToneIcon />
             </ListItemIcon>

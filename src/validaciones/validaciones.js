@@ -1,8 +1,10 @@
-
+import { CartNotas } from "../components/CartNotas";
 
 const validarNombre = (nombre) => {
   return nombre.length <= 10;
 };
+
+
 
 const extrarUsuario = (array, valorBuscar) => {
 let objetoUsuario=null
@@ -17,7 +19,4 @@ let objetoUsuario=null
 
 
 
-
-
-
-export { validarNombre, extrarUsuario, };
+export { validarNombre, extrarUsuario,};

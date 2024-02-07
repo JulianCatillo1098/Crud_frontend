@@ -13,10 +13,12 @@ import { Side } from "./side";
 import { activarSide } from "../store/notaSlice";
 import { CartNotas } from "./CartNotas";
 import { Grid } from "@mui/material";
+import { TodasLasCartas } from "./TodasLasCartas";
+import { MisNotas } from "./MisNotas";
 
 export const VistaUsuario = () => {
   const { usuarioingresado } = useSelector((state) => state.usuarios);
-  const { side, notas } = useSelector((state) => state.notas);
+  const { side, misNotas, crearNota } = useSelector((state) => state.notas);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -57,19 +59,12 @@ export const VistaUsuario = () => {
             </Toolbar>
           </AppBar>
           <Box sx={{ flexGrow: 1 }}>
-            {/* Aquí puedes poner tu contenido principal */}
             <Typography variant="h2" component="h1" gutterBottom>
-              <Grid container spacing={2}>
-              {notas && Array.isArray(notas) ? (
-                notas.map((dato) => (
-                  <CartNotas key={dato.id}userId={dato.userId} title={dato.title} />
-                ))
-              ) : (
-                <h5>Cargando notas...</h5>
-              )}
-
-              </Grid>
-              
+              {crearNota && misNotas == false ? (
+                <TodasLasCartas />
+              ) : misNotas ? (
+                <MisNotas />
+              ) : null}
             </Typography>
           </Box>
           {side ? <Side /> : ""}
